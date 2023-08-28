@@ -1,5 +1,60 @@
 console.log('%c HI', 'color: firebrick')
 
+// Second Walkthrough
+const imgUrl = "https://dog.ceo/api/breeds/image/random/4";
+
+const breedUrl = "https://dog.ceo/api/breeds/list/all";
+
+// Fetches API images and breed data
+fetch("https://dog.ceo/api/breeds/image/random/4")
+    .then((resp) => resp.json())
+    .then((data) => renderImages(data.message))
+fetch("https://dog.ceo/api/breeds/list/all")
+    .then((resp) => resp.json())
+    .then((data) => {
+        renderBreeds(Object.keys(data.message))
+    })
+
+// Adds image elements to the DOM "forEach" image in the array
+function renderImages(urlArray) {
+    const imgDiv = document.querySelector('#dog-image-container');
+    urlArray.forEach((url) => {
+        // console.log(urlArray);
+        const img = document.createElement("img");
+        img.src = url;
+        imgDiv.append(img);
+    })
+}
+
+
+
+// Adds the breeds to the page in the <ul> provided in index.html
+function renderBreeds(breedArray) {
+    const breedId = document.querySelector("#dog-breeds");
+    breedArray.forEach((breed) => {
+        // console.log(breedArray);
+        const li = document.createElement("li");
+        li.textContent = breed;
+
+        li.addEventListener("click", (e) => e.target.style.color = "red")
+        li.addEventListener("dblclick", (e) => e.target.style.color = "black")
+
+        breedId.append(li);
+    })
+}
+
+
+
+// Challenge 4: Filter dog breeds by starting letter of breed names
+
+
+
+
+
+
+
+/*
+// First Walkthrough
 // Challenge 1
 const imgUrl = "https://dog.ceo/api/breeds/image/random/4";
 
@@ -27,7 +82,7 @@ function renderImages(urlArray) {
     // 3. Set image src to url
     // 4. Append image to div with ID of dog-image-container
 
-    const divForImgs =document.querySelector('#dog-image-container')
+    const divForImgs = document.querySelector('#dog-image-container')
 
     urlArray.forEach((url) => {
         // console.log(url);
@@ -102,3 +157,4 @@ function filterBreeds(breedArray) {
         renderBreeds(filterBreeds);
     }
 }
+*/
